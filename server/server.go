@@ -1,14 +1,19 @@
 package server
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"strings"
 )
 
+// server.go
+const jsonContentType = "application/json"
+
 type PlayerStore interface {
 	GetPlayerScore(name string) int
 	RecordWin(name string)
+	GetLeague() []Player
 }
 
 // server.go
@@ -36,8 +41,17 @@ func NewPlayerServer(store PlayerStore) *PlayerServer {
 	return p
 }
 
+// server.go
 func (p *PlayerServer) leagueHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("content-type", jsonContentType)
+	json.NewEncoder(w).Encode(p.Store.GetLeague())
 	w.WriteHeader(http.StatusOK)
+}
+
+func (p *PlayerServer) GetLeague() []Player {
+	return []Player{
+		{"Chris", 20},
+	}
 }
 
 func (p *PlayerServer) playersHandler(w http.ResponseWriter, r *http.Request) {

@@ -24,6 +24,10 @@ func (i *InMemoryPlayerStore) GetPlayerScore(name string) int {
 	return i.players[name]
 }
 
+func (i *InMemoryPlayerStore) GetLeague() []server.Player {
+	return nil
+}
+
 func main() {
 	server := server.NewPlayerServer(NewInMemoryPlayerStore())
 	log.Fatal(http.ListenAndServe(":5002", server))
