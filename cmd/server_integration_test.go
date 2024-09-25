@@ -12,7 +12,7 @@ import (
 func TestRecordingWinsAndRetrievingThem(t *testing.T) {
 	//server_integration_test.go
 	store := NewInMemoryPlayerStore()
-	server := server.PlayerServer{store}
+	server := server.NewPlayerServer(store)
 	player := "Pepper"
 
 	server.ServeHTTP(httptest.NewRecorder(), newPostWinRequest(player))
