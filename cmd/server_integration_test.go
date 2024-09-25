@@ -1,10 +1,10 @@
-// server_integration_test.go
 package main
 
 import (
 	"encoding/json"
 	"fmt"
 	"github.com/zlw8844/playerscore/server"
+	. "github.com/zlw8844/playerscore/server"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -42,8 +42,8 @@ func TestRecordingWinsAndRetrievingThem(t *testing.T) {
 			}
 		*/
 
-		want := []server.Player{
-			{Name: "Pepper", Score: 3},
+		want := []Player{
+			{Name: "Pepper", Wins: 3},
 		}
 		assertLeague(t, got, want)
 	})
