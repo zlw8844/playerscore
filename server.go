@@ -1,4 +1,4 @@
-package server
+package poker
 
 import (
 	"encoding/json"
@@ -13,7 +13,7 @@ const jsonContentType = "application/json"
 type PlayerStore interface {
 	GetPlayerScore(name string) int
 	RecordWin(name string)
-	GetLeague() []Player
+	GetLeague() League
 }
 
 // server.go
@@ -43,9 +43,9 @@ func (p *PlayerServer) leagueHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
-func (p *PlayerServer) GetLeague() []Player {
-	return []Player{
-		{"Chris", 20},
+func (p *PlayerServer) GetLeague() League {
+	return League{
+		{Name: "Chris", Wins: 20},
 	}
 }
 
